@@ -1,60 +1,109 @@
 import React, { Component } from 'react'
 // can use this destructuring above as opposed to
 //"import React from 'react'"" and "class App extends React.Component
-import './App.css';
-import MessagesList from './Components/MessagesList';
-import Toolbar from './Components/Toolbar';
-import Navbar from './Components/Navbar';
+import './App.css'
+import MessagesList from './Components/MessagesList'
+import Toolbar from './Components/Toolbar'
+import Navbar from './Components/Navbar'
 
 class App extends Component {
-  constructor(props){
-    super(props)
+  constructor() {  // removed props
+    super()   // removed props
     this.state = {
-      messages: this.props.messages
+      messages: messages  // removed this.
     }
   }
 
-toggleClass = (message) => {
-  const index = this.state.messages.indexOf(message)
-  let newMessages = this.state.messages.slice(0)  // creates a new copy of the array
-  newMessages[index].class1 = !newMessages[index].class1; //.read returns a boolean value
-  this.setState({messages:newMessages})
-}
+  toggleClass = (message, class1) => {
+    console.log(message)
+    const index = this.state.messages.indexOf(message)
+    let newMessages = this.state.messages.slice(0) // creates a new copy of the array
+    newMessages[index][class1] = !newMessages[index][class1] //.read returns a boolean value
+    this.setState({ messages: newMessages })
+  }
 
-// this function will set the initial state of the messages
-toggleSelected = (message) => {
-const select = this.state.messages.indexOf(read)
-let readMessages = this.state.messages.slice(0)
-readMessages[index].class1 = !readMessages[index].class1;
-this.setState({messages: readMessages})
+  // this function will set the initial state of the messages
 
-toggleUpdate = (message) => {
-  const selectNew = this.setState
-}
+  toggleUpdate = message => {
+    const selectNew = this.setState
+  }
 
-
-
-//
-//   if (select) {
-//   // change the state with setState
-//   // check checkbox
-//   // mark as read
-// } else {
-//   // uncheck checkbox
-//   // mark as unread
-//  }
 
   render() {
     return (
       <div className="App">
-      <Navbar />
-      <div className='container'>
-      <Toolbar />
-      <MessagesList messages = {this.state.messages} toggleClass = {this.toggleClass}/>
+        <Navbar />
+        <div className="container">
+          <Toolbar />
+          <MessagesList
+            messages={this.state.messages}
+            toggleClass={this.toggleClass}
+          />
+        </div>
       </div>
-      </div>
-    );
+    )
   }
 }
+
+const messages = [
+  {
+    "id": 1,
+    "subject": "You can't input the protocol without calculating the mobile RSS protocol!",
+    "read": false,
+    "starred": true,
+    "labels": ["dev", "personal"]
+  },
+  {
+    "id": 2,
+    "subject": "connecting the system won't do anything, we need to input the mobile AI panel!",
+    "read": false,
+    "starred": false,
+    "selected": false,
+    "labels": []
+  },
+  {
+    "id": 3,
+    "subject": "Use the 1080p HTTP feed, then you can parse the cross-platform hard drive!",
+    "read": false,
+    "starred": true,
+    "labels": ["dev"]
+  },
+  {
+    "id": 4,
+    "subject": "We need to program the primary TCP hard drive!",
+    "read": true,
+    "starred": false,
+    "selected": false,
+    "labels": []
+  },
+  {
+    "id": 5,
+    "subject": "If we override the interface, we can get to the HTTP feed through the virtual EXE interface!",
+    "read": false,
+    "starred": false,
+    "labels": ["personal"]
+  },
+  {
+    "id": 6,
+    "subject": "We need to back up the wireless GB driver!",
+    "read": true,
+    "starred": true,
+    "labels": []
+  },
+  {
+    "id": 7,
+    "subject": "We need to index the mobile PCI bus!",
+    "read": true,
+    "starred": false,
+    "labels": ["dev", "personal"]
+  },
+  {
+    "id": 8,
+    "subject": "If we connect the sensor, we can get to the HDD port through the redundant IB firewall!",
+    "read": true,
+    "starred": true,
+    "labels": []
+  }
+]
 
 export default App
