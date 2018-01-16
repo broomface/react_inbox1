@@ -3,7 +3,7 @@
   padding-top: 8px;
   padding-bottom: 8px;
   cursor: pointer;
-  border-bottom: 1px solid #efefef;
+  border-bottom: 1px solid #efefef;   /* light grey   */
 }
 
 .message a {
@@ -15,11 +15,11 @@
 }
 
 .message + .message {
-  border-top: 1px solid #efefef;
+  border-top: 1px solid #efefef;   /* light grey   */
 }
 
 .message.read {
-  background: #efefef;
+  background: #efefef;   /* light grey   */
 }
 
 .message.unread {
@@ -27,12 +27,12 @@
 }
 
 .message.selected {
-  background: #ffffcc;
+  background: #ffffcc;    /* yellow   */
 }
 
 .message:hover {
   margin-left: -3px;
-  border-left: 3px solid #ccc;
+  border-left: 3px solid #ccc;    /* darker grey   */
 }
 
 .message-body {
@@ -67,6 +67,8 @@ footer.spacer {
 
 .label {
   margin-right: .5em;
+  /* border: 10em solid black;
+  background: #f4a742; */
 }
 
 .fa-close {

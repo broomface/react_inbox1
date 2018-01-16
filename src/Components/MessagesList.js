@@ -6,6 +6,8 @@ const MessagesList = ({messages, toggleClass}) => {
   return (
 <div>
   {messages.map(message => <Message key={message.id} message={message} toggleClass= {toggleClass}/>)}
+ // mapping over all messages, giving them an id (of index) and displaying
+
 </div>
   )
 }

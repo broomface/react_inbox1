@@ -7,15 +7,14 @@ import Toolbar from './Components/Toolbar'
 import Navbar from './Components/Navbar'
 
 class App extends Component {
-  constructor() {  // removed props
-    super()   // removed props
+  constructor() {
+    super()
     this.state = {
-      messages: messages  // removed this.
+      messages: messages
     }
   }
 
   toggleClass = (message, class1) => {
-    console.log(message)
     const index = this.state.messages.indexOf(message)
     let newMessages = this.state.messages.slice(0) // creates a new copy of the array
     newMessages[index][class1] = !newMessages[index][class1] //.read returns a boolean value
@@ -34,10 +33,12 @@ class App extends Component {
       <div className="App">
         <Navbar />
         <div className="container">
-          <Toolbar />
+          <Toolbar
+          toggleClass={this.toggleClass}  // pushing props to MessagesList
+          />
           <MessagesList
-            messages={this.state.messages}
-            toggleClass={this.toggleClass}
+            messages={this.state.messages}  // pushing props to MessagesList
+            toggleClass={this.toggleClass}  // pushing props to MessagesList
           />
         </div>
       </div>

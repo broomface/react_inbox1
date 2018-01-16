@@ -1,6 +1,11 @@
 import React from 'react'
+import Message from './Message'
 
-const Toolbar = () => {
+
+const Toolbar = (toggleClass) => {
+  const selectButtonClass = ["fa fa-check-square-o", "fa fa-minus-square-o" , "fa fa-square-o"]
+
+
   return (
     <div className="row toolbar">
   <div className="col-md-12">
@@ -9,11 +14,16 @@ const Toolbar = () => {
       unread messages
     </p>
 
-    <button className="btn btn-default">
+    <button className={`btn btn-default ${selectButtonClass}`}
+    onClick={() => {
+      toggleClass(selectButtonClass)
+
+    }}    >
+
       <i className="fa fa-check-square-o"></i>
     </button>
 
-    <button className="btn btn-default">
+    <button className={`btn btn-default`}>
       Mark As Read
     </button>
 
