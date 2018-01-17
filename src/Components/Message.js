@@ -6,9 +6,16 @@ import React from 'react'
   const starredClass = message.starred ? 'fa-star' : 'fa-star-o'
   const checkedClass = message.checked ? 'checked' : ''
   const subject = message.subject
+
   const labels = message.labels.map((label, idx) => (
     <span key= {idx} className= "label label-warning">{label}</span>
-) )
+))
+
+let selector = '';
+
+if (message.selected === true){
+  selector = 'checked'
+}
 
   return (
     <div className= {`row message ${selectedClass} ${readClass}`}
@@ -19,7 +26,7 @@ import React from 'react'
           <div className="col-xs-2">
             <input
               type="checkbox"
-              checked={!!message.selected}  // defaulting to no boxes checked
+              checked={`${selector}`} // defaulting to no boxes checked
               //readOnly= {true}   // ??
               onClick={() => {
                toggleClass(message, 'selected')
@@ -28,22 +35,20 @@ import React from 'react'
           </div>
           <div
             className="col-xs-2"
-            checked={!!'fa-star'}
+            // checked={!!'fa-star'}
             onClick={() => {
               toggleClass(message, 'starred')
             }}
           >
-            <i className={`star fa ${starredClass}`} />  // defined above (star)
+            <i className={`star fa ${starredClass}`} />
           </div>
         </div>
       </div>
       <div className="col-xs-11"
       onClick={() => {
         toggleClass(message, 'read')}}>
-
         {labels}
-        {subject} // Both labels and what the message says
-
+        {subject}
       </div>
     </div>
   )

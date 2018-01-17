@@ -5,12 +5,14 @@ import './App.css'
 import MessagesList from './Components/MessagesList'
 import Toolbar from './Components/Toolbar'
 import Navbar from './Components/Navbar'
+let isRead = true
 
 class App extends Component {
   constructor() {
     super()
     this.state = {
-      messages: messages
+      messages: messages,
+      bulkSelect: 1 // bulkSelect is for checkbox
     }
   }
 
@@ -23,10 +25,111 @@ class App extends Component {
 
   // this function will set the initial state of the messages
 
+  messageBox = () => {
+    const selectAll = 0
+    const selectSome = 1
+    const selectNone = 2
+
+
+
+
+let newMessage = this.state.messages.slice(0)
+if(isRead === true){
+  for (let i = 0; i < newMessage.length; i++){
+    newMessage[i].selected = true;
+  }
+  isRead= false
+}
+else{
+  for (let i = 0; i < newMessage.length; i++){
+    newMessage[i].selected = false;
+  }
+  isRead = true
+}
+
+  this.setState({
+    messages: newMessage
+  })
+}
+
+  markRead = () => {
+   let newMessages = this.state.messages.slice(0);
+   newMessages.map((elem) => {
+     if(elem.selected === true){
+       elem.read = true
+       elem.selected = false
+     }
+   })
+   this.setState({
+     messages: newMessages
+   })
+  }
+
+  markUnread = () => {
+    let newMessages = this.state.messages.slice(0);
+    newMessages.map((ele) => {
+      if(ele.selected === true){
+        ele.read = false
+        ele.selected = false
+      }
+    })
+    this.setState({
+      messages: newMessages
+    })
+  }
+
+labelSel = (e) => {  // e is requesting the actual input from the event
+  let newMessage = this.state.messages.slice(0);
+  newMessage.map((ele) => {
+
+    if(ele.selected === true){
+      if(ele.labels.includes(e.target.value)){
+      } else {
+       ele.labels.push(e.target.value)
+     }
+     ele.selected = false
+     e.target.value = "Apply label"
+    }
+  })
+  this.setState({
+    messages: newMessage
+  })
+}
+
+labelRem = (e) => {
+  let newMessage = this.state.messages.slice(0);
+  newMessage.map((ele) => {
+    if(ele.selected === true){
+       if(ele.labels.includes(e.target.value)){
+         ele.labels.splice(ele.labels.indexOf(e.target.value), 1)
+       }
+       ele.selected = false
+       e.target.value = "Remove label"
+    }
+  })
+  this.setState({
+    messages: newMessage
+  })
+}
+
+del = () => {
+  let arr = []
+  let newMessage = this.state.messages.slice(0)
+  newMessage.map((ele) => {
+    if(!ele.selected){
+      arr.push(ele)
+    }
+  })
+  this.setState({
+    messages: arr
+  })
+}
+
+
+
   toggleUpdate = message => {
     const selectNew = this.setState
   }
-
 
   render() {
     return (
@@ -34,7 +137,14 @@ class App extends Component {
         <Navbar />
         <div className="container">
           <Toolbar
-          toggleClass={this.toggleClass}  // pushing props to MessagesList
+          messageBox = {this.messageBox} // pushing props to MessagesList
+          bulkSelect = {this.state.bulkSelect}
+          messages = {this.state.messages}
+          markRead = {this.markRead}
+          markUnread = {this.markUnread}
+          labelSel = {this.labelSel}
+          labelRem = {this.labelRem}
+          del = {this.del}
           />
           <MessagesList
             messages={this.state.messages}  // pushing props to MessagesList
