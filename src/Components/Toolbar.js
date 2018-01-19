@@ -1,8 +1,14 @@
 import React from 'react'
 import Message from './Message'
+import {
+  BrowserRouter as Router,
+  Path,
+  Route,
+  Switch,
+  Link
+} from 'react-router-dom'
 
-
-const Toolbar = ({messageBox, bulkSelect, messages, markRead, markUnread, labelSel, labelRem, del}) => {
+const Toolbar = ({messageBox, bulkSelect, messages, markRead, markUnread, labelSel, labelRem, del, messCompose}) => {
   let selectButton = ''
 
 // This is for the main toolbar checkblock button...begin
@@ -36,6 +42,20 @@ let unreadMessages = messages.filter((elem) =>{
       <span className="badge badge">{`${unreadMessages.length}`}</span>
       unread messages
     </p>
+   <Switch>
+   <Route path="/compose" render={() => (
+     <Link className = "btn btn-danger" to = "/">
+     <i className= "fa fa-plus"> </i>
+     </Link>
+   )}
+     />
+     <Route path="/" render={() => (
+       <Link className = "btn btn-danger" to = "/compose">
+       <i className= "fa fa-plus"> </i>
+       </Link>
+     )}
+       />
+    </Switch>
 
     <button className="btn btn-default">
           <i className={`${selectButton}`}
