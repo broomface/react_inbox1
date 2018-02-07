@@ -1,64 +1,92 @@
-import React from 'react';
+import React from 'react'
+import {
+  BrowserRouter as Router,
+  Path,
+  Route,
+  Switch,
+  Link
+} from 'react-router-dom'
 
-    const Message = ({ message, toggleClass }) => {
-    const selectedClass = message.selected ? 'selected' : ''
-    const readClass = message.read ? 'read' : 'unread'
-    const starredClass = message.starred ? 'fa-star' : 'fa-star-o'
-    const checkedClass = message.checked ? 'checked' : ''
-    const subject = message.subject
+const Message = ({ message, toggleClass }) => {
+  const selectedClass = message.selected ? 'selected' : ''
+  const readClass = message.read ? 'read' : 'unread'
+  const starredClass = message.starred ? 'fa-star' : 'fa-star-o'
+  const checkedClass = message.checked ? 'checked' : ''
+  const subject = message.subject
 
-    const labels = message.labels.map((label, idx) => (
-      <span key= {idx} className= "label label-warning">{label}</span>
-    ))
+  const labels = message.labels.map((label, idx) => (
+    <span key={idx} className="label label-warning">
+      {label}
+    </span>
+  ))
 
-    let selector = '';
+  let id = message.id
+  let selector = ''
 
-    if (message.selected === true){
-      selector = 'checked'
-    }
+  if (message.selected === true) {
+    selector = 'checked'
 
-  // return (
-  //   <div className= {`row message ${selectedClass} ${readClass}`}>
-  //     <div className="col-xs-1">
-  //       <div className="row">
-  //
-  //         <div className="col-xs-2">
-  //           <input
-  //             type="checkbox"
-  //             checked={`${selector}`} // defaulting to no boxes checked
-  //             //readOnly= {true}   // ??
-  //             onClick={() => {
-  //              toggleClass(message, 'selected')
-  //             }}
-  //           />
-  //         </div>
-  //         <div
-  //           className="col-xs-2"
-  //           onClick={() => {
-  //             toggleClass(message, 'starred')
-  //           }}
-  //         >
-  //           <i className={`star fa ${starredClass}`} />
-  //         </div>
-  //       </div>
-  //     </div>
+  }
 
+  return (
+    <div className={`row message ${selectedClass} ${readClass}`}>
+      <div className="col-xs-1">
+        <div className="row">
+          <div className="col-xs-2">
+            <input
+              type="checkbox"
+              checked={`${selector}`} // defaulting to no boxes checked
+              //readOnly= {true}   // ??
+              onClick={() => {
+                toggleClass(message, 'selected')
+              }}
+            />
+          </div>
+          <div
+            className="col-xs-2"
+            onClick={() => {
+              toggleClass(message, 'starred')
+            }}
+          >
+            <i className={`star fa ${starredClass}`} />
+          </div>
+        </div>
+      </div>
 
-//       <Route path={`/messages/id`} render={() => (  // think if statement
-//       <Link className="col-xs-11" to = "/">  // to change the url
-//      onClick= {() => {
-//         toggleClass(message, 'read')}}
-//         {labels}
-//         {subject}
-//       </Link>
-//   )}
-// />
-  // <Route path="/" render={() => (  // think if statement
-  //   <Link className = "col-xs-11" to = "/:id">  // to change the url
-  //   </Link>
-  // )}
-  //   />
-})
+      <Switch>
+        <Route
+          path={`/id`}
+          render={() => (
+            <Link
+              className="col-xs-11"
+              to="/"
+              onClick={() => {
+                toggleClass(message, 'read')
+              }}
+            >
+              {labels}
+              {subject}
+            </Link>
+          )}
+        />
+        <Route
+          path="/"
+          render={() => (
+            <Link
+              className="col-xs-11"
+              to={`/id`}
+              onClick={() => {
+                toggleClass(message, 'read')
+              }}
+            >
+              {labels}
+              {subject}
+            </Link>
+          )}
+        />
+      </Switch>
+    </div>
+  )
+}
 
-
-export default Message;
+export default Message

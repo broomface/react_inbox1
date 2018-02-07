@@ -6,8 +6,6 @@ const MessagesList = ({messages, toggleClass}) => {
   return (
 <div>
   {messages.map(message => <Message key={message.id} message={message} toggleClass= {toggleClass}/>)}
-
-
 </div>
   )
 }
