@@ -1,9 +1,7 @@
 import React from 'react'
 
 const Compose = ({ addMessage }) => {
-  // const addMessage = () =>{
-  //   subFun()
-  // }
+
 
   return (
     <form className="form-horizontal well">

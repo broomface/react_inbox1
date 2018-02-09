@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import Body from './Body';
 import {
   BrowserRouter as Router,
   Path,
@@ -25,11 +26,13 @@ const Message = ({ message, toggleClass }) => {
 
   if (message.selected === true) {
     selector = 'checked'
-
+    // add the drop down section here?
   }
 
+
+
   return (
-    <div className={`row message ${selectedClass} ${readClass}`}>
+    <div className={`row message ${message.selected ? 'selected' : ''} ${readClass}`}>
       <div className="col-xs-1">
         <div className="row">
           <div className="col-xs-2">
@@ -39,9 +42,12 @@ const Message = ({ message, toggleClass }) => {
               //readOnly= {true}   // ??
               onClick={() => {
                 toggleClass(message, 'selected')
+                {message.subject}
+
               }}
             />
           </div>
+
           <div
             className="col-xs-2"
             onClick={() => {
@@ -81,7 +87,9 @@ const Message = ({ message, toggleClass }) => {
             >
               {labels}
               {subject}
-            </Link>
+              <Body key={message.id} messageId={message.id}
+              />
+              </Link>
           )}
         />
       </Switch>

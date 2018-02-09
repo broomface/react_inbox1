@@ -30,6 +30,7 @@ class App extends Component {
   }
 
   toggleClass = async (message, class1) => {
+   console.log(class1)
     let obj = {
       messageIds: [message.id], // message id
       command: 'star', //
@@ -248,7 +249,7 @@ class App extends Component {
     const message = await response.json()
     this.setState({ messages: [...this.state.messages, message] })
   }
-  messCompose = () => {
+  messCompose = async e => {
     this.setState.message
   }
 
@@ -281,7 +282,11 @@ class App extends Component {
           <Route
             path="/compose"
             render={() => <Compose addMessage={this.addMessage} />}
+
           />
+
+          { /*} <Route path ="message/:id" render={() => <Body messageBody={this.messageBody} } */}
+
           <MessagesList
             messages={this.state.messages} // pushing props to MessagesList
             toggleClass={this.toggleClass} // pushing props to MessagesList
