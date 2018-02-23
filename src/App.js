@@ -1,16 +1,17 @@
 // App.js is where we are holdiong all of our functions and such...
 
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 // can use this destructuring above as opposed to
 //"import React from 'react'"" and "class App extends React.Component
-import './App.css'
-import MessagesList from './Components/MessagesList'
-import Toolbar from './Components/Toolbar'
-import Navbar from './Components/Navbar'
-import Compose from './Components/Compose'
-import { BrowserRouter as Router, Path, Route, Link } from 'react-router-dom'
+import './App.css';
+import MessagesList from './Components/MessagesList';
+import Toolbar from './Components/Toolbar';
+import Navbar from './Components/Navbar';
+import Compose from './Components/Compose';
+import Body from './Components/Body';
+import { BrowserRouter as Router, Path, Route, Link } from 'react-router-dom';
 
-let isRead = true
+let isRead = true;
 
 class App extends Component {
   constructor() {
@@ -42,8 +43,9 @@ class App extends Component {
     this.setState({ messages: newMessages })
 
     if (class1 === 'starred') {
+      let id = message.id
       // response will pull in info from site and allow modification
-      const response = await fetch('http://localhost:8082/api/messages', {
+      const response = await fetch(`http://localhost:8082/api/messages/${id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -216,7 +218,7 @@ class App extends Component {
     })
     let obj = {
       messageIds: ids,
-      command: 'delete'
+      command: 'DELETE'
     }
     this.setState({
       messages: arr
@@ -257,11 +259,11 @@ class App extends Component {
     const selectNew = this.setState
   }
 
-  dropDownClass = (message, idx) => {
-    ;<span key={idx} className="body">
-      {message}
-    </span>
-  }
+  // dropDownClass = (message, idx) => {
+  //   ;<span key={idx} className="body">
+  //     {message}
+  //   </span>
+  // }
 
   render() {
     return (
@@ -269,7 +271,7 @@ class App extends Component {
         <Navbar />
         <div className="container">
           <Toolbar
-            messageBox={this.messageBox} // pushing props to MessagesList
+            messageBox={this.messageBox}
             bulkSelect={this.state.bulkSelect}
             messages={this.state.messages}
             markRead={this.markRead}
@@ -284,8 +286,6 @@ class App extends Component {
             render={() => <Compose addMessage={this.addMessage} />}
 
           />
-
-          { /*} <Route path ="message/:id" render={() => <Body messageBody={this.messageBody} } */}
 
           <MessagesList
             messages={this.state.messages} // pushing props to MessagesList

@@ -21,12 +21,12 @@ const Message = ({ message, toggleClass }) => {
     </span>
   ))
 
+
   let id = message.id
   let selector = ''
 
   if (message.selected === true) {
     selector = 'checked'
-    // add the drop down section here?
   }
 
 
@@ -85,14 +85,30 @@ const Message = ({ message, toggleClass }) => {
                 toggleClass(message, 'read')
               }}
             >
-              {labels}
-              {subject}
-              <Body key={message.id} messageId={message.id}
-              />
+                {labels}
+                {subject}
+                {/* <Body key={message.id} messageId={message.id} />*/}
               </Link>
           )}
-        />
+
+       //    {/* <Route path =`/messages/${id}`
+       //      render={() => <Body />}
+       //  /> */
+       //   //
+       //   // link to  ... in the message
+       //   //
+       //   // link changes the url
+       //   //
+       //   // route is the rule.  if someone goes to this url, load this component
+       //   //
+       //
+  />
+
       </Switch>
+
+
+
+
     </div>
   )
 }
